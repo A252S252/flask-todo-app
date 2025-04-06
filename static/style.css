@@ -1,0 +1,166 @@
+/* 🌞 ライトモード（デフォルト） */
+body {
+    --bg-color: #f7f7f7;
+    --text-color: #333;
+    --card-color: #fff;
+    --button-color: #4caf50;
+    --button-text: white;
+}
+
+body.dark {
+    /* 🌙 ダークモード */
+        --bg-color: #1c1c24; /* ← #121212 より少し明るめ */
+        --text-color: #e8e8f0;
+        --card-color: #2b2b3a;
+        --button-color: #7c4dff; /* 少し青寄りの紫 */
+        --button-text: #fff
+}
+
+/* 共通スタイル（変数で色管理） */
+body {
+    font-family: sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 20px;
+    max-width: 600px;
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    margin: 10px 0;
+}
+
+input[type="text"],
+input[type="date"] {
+    padding: 8px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--card-color);
+    color: var(--text-color);
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    background-color: var(--button-color);
+    color: var(--button-text);
+    border-radius: 4px;
+    margin-left: 4px;
+    cursor: pointer;
+}
+
+li {
+    list-style: none;
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: var(--card-color);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 🌙 テーマ切り替えボタン専用スタイル */
+#theme-button {
+    background-color: var(--button-color);
+    color: var(--button-text);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#theme-button:hover {
+    background-color: #9575cd; /* ← ホバー時の色（お好みで変えてOK） */
+    transform: scale(1.05);
+}
+
+.deadline {
+    color: #999;
+    margin-left: 10px;
+}
+
+.overdue {
+    color: #ff6b6b;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.memo {
+    font-size: 0.9em;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.card {
+    background-color: var(--card-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--text-color); /* ←ここがポイント！ */
+    resize: vertical;
+    background-color: var(--card-color);
+    color: var(--text-color);
+}
+
+
+a {
+    text-decoration: none;
+    color: var(--button-color);
+    font-weight: bold;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: var(--button-color);
+    color: var(--button-text);
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.back-button:hover {
+    background-color: #388e3c; /* ホバー色はお好みで */
+    transform: scale(1.05);
+}
+
+li.done {
+    background-color: #333355; /* 完了済みタスクの背景色（お好みで） */
+    opacity: 0.8;
+}
+
+.done-text {
+    text-decoration: line-through;
+    color: #999;
+}

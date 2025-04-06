@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>TODOアプリ</title>
+</head>
+
+<body>
+    <h1>TODOリスト</h1>
+    <button onclick="toggleTheme()" id="theme-button">🌙 ダークモード</button>
+
+    <!-- タスク一覧表示 -->
+    <ul>
+        {% for task in tasks %}
+        <li class="{% if task[2] == 1 %}done{% endif %}">
+            <div>
+              {% if task[2] == 1 %}
+                <span class="task-text done-text">{{ task[1] }}</span>
+              {% else %}
+                <span class="task-text">{{ task[1] }}</span>
+              {% endif %}
+          
+              {% if task[3] %}
+                {% if task[3] < today %}
+                  <span class="overdue">（期限: {{ task[3] }}）</span>
+                {% else %}
+                  <span class="deadline">（期限: {{ task[3] }}）</span>
+                {% endif %}
+              {% endif %}
+          
+              {% if task[4] %}
+                <div class="memo">📝 {{ task[4] }}</div>
+              {% endif %}
+            </div>
+          
+            <div>
+              <form action="/done/{{ task[0] }}" method="POST" style="display:inline;">
+                <button type="submit">
+                  {% if task[2] == 1 %}
+                    未完了に戻す
+                  {% else %}
+                    完了
+                  {% endif %}
+                </button>
+              </form>
+              <form action="/delete/{{ task[0] }}" method="POST" style="display:inline;">
+                <button type="submit">削除</button>
+              </form>
+              <form action="/edit/{{ task[0] }}" method="GET" style="display:inline;">
+                <button type="submit">編集</button>
+              </form>
+            </div>
+          </li>
+          
+        {% endfor %}
+    </ul>
+    
+
+    <!-- タスク追加フォーム -->
+    <form action="/add" method="POST">
+        <input type="text" name="content" placeholder="新しいタスクを入力" required><br>
+        <input type="date" name="due_date"><br>
+        <textarea name="memo" placeholder="メモを入力" rows="2" cols="40"></textarea><br>
+        <button type="submit">追加</button>
+    </form>
+    <script>
+        function toggleTheme() {
+          const body = document.body;
+          const btn = document.getElementById("theme-button");
+      
+          body.classList.toggle("dark");
+      
+          if (body.classList.contains("dark")) {
+            btn.textContent = "🌞 ライトモード";
+            document.cookie = "theme=dark; path=/";
+          } else {
+            btn.textContent = "🌙 ダークモード";
+            document.cookie = "theme=light; path=/";
+          }
+        }
+      
+        window.onload = function () {
+          const savedTheme = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("theme="))
+            ?.split("=")[1];
+      
+          if (savedTheme === "dark") {
+            document.body.classList.add("dark");
+            document.getElementById("theme-button").textContent = "🌞 ライトモード";
+          }
+        };
+      </script>
+      
+
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>メモを編集</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<!-- ✅ ① ダークモード対応！cookieを使ってbodyにクラスを追加 -->
+<body class="{{ 'dark' if request.cookies.get('theme') == 'dark' else '' }}">
+
+    <div class="container">
+        <h1>📝 メモを編集</h1>
+
+        <div class="card">
+            <p><strong>タスク内容：</strong> {{ task[1] }}</p>
+            <p><strong>期限：</strong> {{ task[3] }}</p>
+
+            <form action="/edit/{{ task[0] }}" method="POST">
+                <textarea name="memo" rows="4" placeholder="メモを編集">{{ task[4] }}</textarea><br><br>
+
+                <!-- ✅ ② ボタンと統一デザイン -->
+                <button type="submit">💾 保存する</button>
+                <a href="/" class="back-button">← 戻る</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
